@@ -64,5 +64,4 @@ typings/
 .idea
 
 # build result
-# comment out until deploy enabled
-# /dist
+ /dist

@@ -24,27 +24,8 @@ jobs:
       - run: yarn ci:check:lint
       - run: yarn ci:check:test
 
-  deploy:
-    docker:
-      - image: circleci/node:latest-browsers
-        environment:
-          CHROME_BIN: '/usr/bin/google-chrome'
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback
-            - v1-dependencies-
-      - run: yarn
-      - run: yarn ci:deploy
-
 workflows:
   version: 2
   ci-cd:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
