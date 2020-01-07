@@ -5,8 +5,36 @@
     <title>Sandbox For UI Development</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.3/rxjs.umd.min.js"></script>
     <script src="./bundle.min.js"></script>
+    <style>
+      .container {
+        display: grid;
+        grid-template-rows: 40vh 1fr;
+        grid-template-columns: 50vw 1fr;
+      }
+      .col {
+        font-size: 11px;
+        padding: 8px;
+      }
+      #left-top {
+        background-color: #fbe9e7;
+      }
+      #right-top {
+        background-color: #f3e5f5;
+      }
+      #left-bot {
+        background-color: #f1f8e9;
+      }
+      #right-bot {
+        background-color: #e1f5fe;
+      }
+    </style>
   </head>
   <body>
-    <div id="debugboard"></div>
+    <div class="container">
+      <div id="left-top" class="col"></div>
+      <div id="right-top" class="col"></div>
+      <div id="left-bot" class="col"></div>
+      <div id="right-bot" class="col"></div>
+    </div>
   </body>
 </html>

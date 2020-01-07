@@ -15,7 +15,6 @@ module.exports = {
   ui: {
     port: 3001,
   },
-  files: ['dist/bundle.js', 'dist/style.css'],
   watchEvents: ['change'],
   watch: true,
   ignore: [],
@@ -24,10 +23,7 @@ module.exports = {
     ignoreInitial: true,
   },
   server: {
-    baseDir: './',
-    routes: {
-      '/dist': 'dist',
-    },
+    baseDir: './docs',
   },
   proxy: false,
   port: 3000,

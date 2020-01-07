@@ -16,7 +16,7 @@
     "ci:check:lint": "yarn format && yarn check:diff",
     "ci:check:test": "yarn test:unit --ci --silent --detectOpenHandles --forceExit --collectCoverage",
     "deploy:docs": "yarn build:prod && cp dist/bundle.min.js docs/bundle.min.js",
-    "format": "yarn lint:ts --fix && prettier --config .prettierrc --write '{deploy,src,.circleci,sandbox}/**/*.{ts,js,scss,html,md,yml}' ./*.{js,json}",
+    "format": "yarn lint:ts --fix && prettier --config .prettierrc --write '{docs,src,.circleci}/**/*.{ts,js,scss,html,md,yml}' ./*.{js,json}",
     "lint:ts": "eslint 'src/**/*.ts'",
     "jest": "node --max_old_space_size=4096 ./node_modules/.bin/jest",
     "start:dev": "yarn build:dev && concurrently 'yarn :build:dev:ts:watch' 'browser-sync start --config bs-config.js'",
