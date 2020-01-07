@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig",
+  "include": ["src/**/*.ts"],
+  "exclude": ["dist", "node_modules", "src/**/*.spec.ts"],
+  "compilerOptions": {
+    "baseUrl": "./"
+  }
+}
