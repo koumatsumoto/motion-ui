@@ -1,1 +1,1 @@
-export { getDeviceOrientationEventStream } from './get-device-orientation-stream';
+export { getDeviceOrientationStream } from './get-device-orientation-stream';

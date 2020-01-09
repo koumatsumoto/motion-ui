@@ -3,7 +3,7 @@ import { getRx } from '../../rxjs';
 import { DeviceOrientation, PartialDeviceOrientation } from '../types';
 import { extract, onlyEntire } from './internal/rx-operators';
 
-export const getDeviceOrientationEventStream = () => {
+const getDeviceOrientationEventStream = () => {
   const Subject = getRx().Subject;
   const subject = new Subject<PartialDeviceOrientation>();
 
@@ -14,6 +14,9 @@ export const getDeviceOrientationEventStream = () => {
   return subject.asObservable();
 };
 
-export const getDeviceOrientationStream = () => {
-  return getDeviceOrientationEventStream().pipe(extract(), onlyEntire()) as Observable<DeviceOrientation>;
+/**
+ * @param source - for testing
+ */
+export const getDeviceOrientationStream = (source: Observable<PartialDeviceOrientation> = getDeviceOrientationEventStream()) => {
+  return source.pipe(extract(), onlyEntire()) as Observable<DeviceOrientation>;
 };

@@ -1,11 +1,10 @@
 import { Observable } from 'rxjs';
 import { getRx } from '../../../rxjs';
-import { DeviceOrientation, PartialDeviceOrientation } from '../../types';
-import { roundToInt } from '../../../arithmetic';
-import { isEntireDeviceOrientation } from './is-entire-device-orientation';
+import { PartialDeviceOrientation } from '../../types';
+import { isEntireDeviceOrientation } from './is-entire';
 
 /**
- * strip unnecessary properties
+ * strip unnecessary properties of Event class
  */
 export const extract = () => (source: Observable<PartialDeviceOrientation>) => {
   const { map } = getRx().operators;
@@ -24,17 +23,4 @@ export const onlyEntire = () => (source: Observable<PartialDeviceOrientation>) =
   const { filter } = getRx().operators;
 
   return source.pipe(filter(isEntireDeviceOrientation));
-};
-
-export const roundDecimal = () => (source: Observable<DeviceOrientation>) => {
-  const { map } = getRx().operators;
-
-  return source.pipe(
-    map((v) => ({
-      absolute: v.absolute,
-      alpha: roundToInt(v.alpha),
-      beta: roundToInt(v.beta),
-      gamma: roundToInt(v.gamma),
-    })),
-  );
 };

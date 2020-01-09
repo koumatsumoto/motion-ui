@@ -1,5 +1,5 @@
 import { createTestingPartialDeviceOrientation } from '../../test-helpers';
-import { isEntireDeviceOrientation } from './is-entire-device-orientation';
+import { isEntireDeviceOrientation } from './is-entire';
 
 describe('isEntireDeviceOrientation', () => {
   it('should cond', () => {

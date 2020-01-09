@@ -1,6 +1,6 @@
 import { DeviceMotionValue } from '../../types';
 
-export const calculateMotionAverage = (changes: DeviceMotionValue[]): DeviceMotionValue | null => {
+export const calculateAverage = (changes: DeviceMotionValue[]): DeviceMotionValue | null => {
   if (changes.length < 1) {
     return null;
   }

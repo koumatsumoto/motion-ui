@@ -1,5 +1,5 @@
 import { createTestingPartialDeviceMotion } from '../../test-helpers';
-import { isEntireDeviceMotion } from './is-entire-device-motion';
+import { isEntireDeviceMotion } from './is-entire';
 
 describe('isEntireDeviceMotion', () => {
   it('should cond', () => {

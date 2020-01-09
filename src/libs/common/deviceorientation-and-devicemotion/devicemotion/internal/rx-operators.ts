@@ -1,11 +1,9 @@
 import { Observable } from 'rxjs';
-import { DeviceMotion, DeviceMotionAsTuple, DeviceMotionValue, DeviceMotionWithChange, PartialDeviceMotion, Precision } from '../../types';
+import { DeviceMotion, DeviceMotionValue, DeviceMotionWithChange, PartialDeviceMotion } from '../../types';
 import { getRx } from '../../../rxjs';
-import { calculateMotionChange, makeTuple } from './make-change';
-import { calculateMotionAverage } from './calculate-average';
-import { toInt } from './to-int';
-import { normalize, ThresholdOption } from './normalize';
-import { isEntireDeviceMotion } from './is-entire-device-motion';
+import { getDifference } from './get-difference';
+import { calculateAverage } from './calculate-average';
+import { isEntireDeviceMotion } from './is-entire';
 
 // TODO: use pairwise
 export const withChange = () => (source: Observable<DeviceMotion>) => {
@@ -22,7 +20,7 @@ export const withChange = () => (source: Observable<DeviceMotion>) => {
       } else {
         return {
           data: val,
-          change: calculateMotionChange(state.data, val),
+          change: getDifference(state.data, val),
         };
       }
     }, null),
@@ -38,26 +36,8 @@ export const toAverage = (denominator = 4) => (source: Observable<DeviceMotionVa
 
   return source.pipe(
     bufferCount(denominator),
-    map((items: DeviceMotionValue[]) => calculateMotionAverage(items)),
+    map((items: DeviceMotionValue[]) => calculateAverage(items)),
   );
-};
-
-export const toInteger = (precision: Precision = 8) => (source: Observable<DeviceMotion>) => {
-  const { map } = getRx().operators;
-
-  return source.pipe(map((v) => toInt(v, precision)));
-};
-
-export const asTuple = () => (source: Observable<DeviceMotionWithChange>) => {
-  const { map } = getRx().operators;
-
-  return source.pipe(map(makeTuple));
-};
-
-export const normalizeByThreshold = (threshold?: ThresholdOption) => (source: Observable<DeviceMotionAsTuple>) => {
-  const { map } = getRx().operators;
-
-  return source.pipe(map((v) => normalize(v, threshold)));
 };
 
 export const onlyEntire = () => (source: Observable<PartialDeviceMotion>) => {
