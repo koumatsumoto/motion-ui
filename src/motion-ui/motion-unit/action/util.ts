@@ -1,4 +1,4 @@
-import { Movement } from '../movement/classify-movement';
+import { MotionUnit } from '../internal/classify-movement';
 
 export type RelativeMovement = {
   rate: -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5;
@@ -6,12 +6,12 @@ export type RelativeMovement = {
   align: boolean;
 };
 
-export const simplifyMovements = (movements: Movement[]): RelativeMovement[] => {
+export const simplifyMovements = (movements: MotionUnit[]): RelativeMovement[] => {
   if (movements.length < 1) {
     return [];
   }
 
-  let baseDirection: Movement['direction'] | undefined;
+  let baseDirection: MotionUnit['direction'] | undefined;
   return movements.map((m) => {
     if (baseDirection === undefined && m.rate !== 0) {
       baseDirection = m.direction;

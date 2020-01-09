@@ -1,8 +1,8 @@
-import { Movement } from '../movement/classify-movement';
+import { MotionUnit } from '../internal/classify-movement';
 import { contain, simplifyMovements } from './util';
 
 describe('simplifyMovements', () => {
-  const v = (rate: Movement['rate'], direction: Movement['direction']): Movement => ({
+  const v = (rate: MotionUnit['rate'], direction: MotionUnit['direction']): MotionUnit => ({
     rate,
     direction,
     orientation: 'up',

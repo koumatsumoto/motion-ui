@@ -1,9 +1,9 @@
-import { Movement } from '../movement/classify-movement';
+import { MotionUnit } from '../internal/classify-movement';
 import { simplifyMovements } from './util';
 
 export const quickReverseCount = 2;
 
-export const isQuickReverse = (movements: Movement[]): boolean => {
+export const isQuickReverse = (movements: MotionUnit[]): boolean => {
   if (movements.length < quickReverseCount) {
     return false;
   }

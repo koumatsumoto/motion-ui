@@ -1,5 +1,5 @@
-import { Movement } from '../movement/classify-movement';
-import { within } from '../../../arithmetic';
+import { MotionUnit } from '../internal/classify-movement';
+import { within } from '../../../libs/common/arithmetic';
 import { simplifyMovements } from './util';
 
 /**
@@ -23,7 +23,7 @@ import { simplifyMovements } from './util';
  *
  * @param movements
  */
-export const isTap = (movements: Movement[]): boolean => {
+export const isTap = (movements: MotionUnit[]): boolean => {
   if (movements.length < 3) {
     return false;
   }

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { getRx } from '../../rxjs';
+import { getRx } from '../../libs/common/rxjs';
 import { DeviceOrientation, PartialDeviceOrientation } from '../types';
 import { extract, onlyEntire } from './internal/rx-operators';
 

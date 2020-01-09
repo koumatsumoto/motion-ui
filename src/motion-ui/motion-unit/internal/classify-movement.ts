@@ -1,4 +1,4 @@
-import { CombinedValue } from './combine';
+import { Summary } from './summarize';
 
 type Threshold = {
   veryHigh: number;
@@ -20,7 +20,7 @@ export const defaultThreshold: Threshold = {
   round: 10,
 };
 
-export type Movement = {
+export type MotionUnit = {
   orientation: 'up' | 'down';
   direction: 'up' | 'down';
   // stopping, slightly, low, mid, high
@@ -45,7 +45,7 @@ const calcRate = (value: number, threshold: Threshold) => {
   }
 };
 
-export const classify = (a: CombinedValue, threshold: Threshold = defaultThreshold): Movement => {
+export const unify = (a: Summary, threshold: Threshold = defaultThreshold): MotionUnit => {
   if (a.first < a.last) {
     // up
     const rate = calcRate(a.last - a.first, threshold);

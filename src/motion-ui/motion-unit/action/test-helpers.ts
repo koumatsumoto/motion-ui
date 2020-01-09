@@ -1,6 +1,6 @@
-import { Movement } from '../movement/classify-movement';
+import { MotionUnit } from '../internal/classify-movement';
 
-const createMovement = (value: number, direction: Movement['direction'] = 'up'): Movement => {
+const createMovement = (value: number, direction: MotionUnit['direction'] = 'up'): MotionUnit => {
   let rate = value;
   if (rate < 0) {
     direction = direction === 'up' ? 'down' : 'up';
@@ -10,12 +10,12 @@ const createMovement = (value: number, direction: Movement['direction'] = 'up'):
   return {
     orientation: 'up',
     direction,
-    rate: rate as Movement['rate'],
+    rate: rate as MotionUnit['rate'],
     align: false,
   };
 };
 
-export const createMovements = (values: number[], direction: Movement['direction'] = 'up'): Movement[] => {
+export const createMovements = (values: number[], direction: MotionUnit['direction'] = 'up'): MotionUnit[] => {
   return values.map((v) => createMovement(v, direction));
 };
 

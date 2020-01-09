@@ -2,17 +2,17 @@ import { Observable } from 'rxjs';
 import { DeviceMotion, DeviceOrientation } from '../types';
 import { getDeviceOrientationStream } from '../deviceorientation/get-device-orientation-stream';
 import { getDeviceMotionStream } from '../devicemotion';
-import { getRx, withHistory } from '../../rxjs';
-import { combine } from './movement/combine';
+import { getRx, withHistory } from '../../libs/common/rxjs';
+import { summarize } from './internal/summarize';
 import { ActionTypes } from './types';
-import { classify, Movement } from './movement/classify-movement';
+import { unify, MotionUnit } from './internal/classify-movement';
 import { checkHoldAndEntering } from './action/hold';
 import { isQuickReverse } from './action/reverse';
 
-export const getMovementStream = (
+export const getMotionUnitStream = (
   orientation$: Observable<DeviceOrientation> = getDeviceOrientationStream(),
   motion$: Observable<DeviceMotion> = getDeviceMotionStream(),
-): Observable<{ sid: number; data: Movement }> => {
+): Observable<{ sid: number; data: MotionUnit }> => {
   const { bufferCount, map, withLatestFrom } = getRx().operators;
 
   let sid = 0;
@@ -21,8 +21,8 @@ export const getMovementStream = (
     withLatestFrom(orientation$),
     map(([motions, orientation]) => {
       const gammas = motions.map((m) => m.rotationRate.gamma);
-      const aggregation = combine(orientation.gamma, gammas);
-      const data = classify(aggregation);
+      const motionUnit = summarize(orientation.gamma, gammas);
+      const data = unify(motionUnit);
 
       return {
         sid: sid++,
@@ -35,7 +35,7 @@ export const getMovementStream = (
 export const debug3 = () => {
   const { filter, map } = getRx().operators;
 
-  return getMovementStream().pipe(
+  return getMotionUnitStream().pipe(
     filter((d) => d.data.rate > 0),
     map((d) => {
       const di = d.data.direction === 'up' ? 'u' : 'd';
@@ -58,7 +58,7 @@ export const getActionStream = () => {
   const movementCount = 10;
 
   return new Observable<Action>((subscriber) => {
-    getMovementStream()
+    getMotionUnitStream()
       .pipe(
         withHistory(movementCount),
         map((items) => {

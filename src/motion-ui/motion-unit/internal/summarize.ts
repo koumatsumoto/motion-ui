@@ -1,5 +1,5 @@
-import { Writeable } from '../../../../../types';
-import { roundToInt } from '../../../arithmetic';
+import { Writeable } from '../../../types';
+import { roundToInt } from '../../../libs/common/arithmetic';
 
 /**
  * NOTE:
@@ -12,7 +12,7 @@ import { roundToInt } from '../../../arithmetic';
  *   - negative if tilting to right
  *
  */
-export type CombinedValue = {
+export type Summary = {
   readonly orientation: 'up' | 'down';
   readonly count: number;
   readonly increase: number;
@@ -26,7 +26,7 @@ export type CombinedValue = {
 };
 
 // TODO: currently used only for gamma
-export const combine = (orientation: number, accelerations: number[]): CombinedValue => {
+export const summarize = (orientation: number, accelerations: number[]): Summary => {
   if (accelerations.length < 2) {
     throw new Error('bad impl');
   }
@@ -34,7 +34,7 @@ export const combine = (orientation: number, accelerations: number[]): CombinedV
   const first = accelerations[0];
   const last = accelerations[accelerations.length - 1];
 
-  const movement: Writeable<CombinedValue> = {
+  const summary: Writeable<Summary> = {
     orientation: orientation >= 0 ? 'up' : 'down',
     count: accelerations.length,
     increase: 0,
@@ -52,24 +52,24 @@ export const combine = (orientation: number, accelerations: number[]): CombinedV
     const p = accelerations[i - 1];
     const v = accelerations[i];
     if (v > p) {
-      movement.increase++;
+      summary.increase++;
     } else if (v < p) {
-      movement.decrease++;
+      summary.decrease++;
     } else {
-      movement.nochange++;
+      summary.nochange++;
     }
 
     sum += v;
-    movement.max = Math.max(movement.max, v);
-    movement.min = Math.min(movement.min, v);
+    summary.max = Math.max(summary.max, v);
+    summary.min = Math.min(summary.min, v);
   }
 
-  movement.avg = sum / movement.count;
-  movement.avg = roundToInt(movement.avg);
-  movement.min = roundToInt(movement.min);
-  movement.max = roundToInt(movement.max);
-  movement.first = roundToInt(movement.first);
-  movement.last = roundToInt(movement.last);
+  summary.avg = sum / summary.count;
+  summary.avg = roundToInt(summary.avg);
+  summary.min = roundToInt(summary.min);
+  summary.max = roundToInt(summary.max);
+  summary.first = roundToInt(summary.first);
+  summary.last = roundToInt(summary.last);
 
-  return movement;
+  return summary;
 };

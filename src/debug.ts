@@ -1,8 +1,4 @@
-import {
-  debug3,
-  getCommandHistoryStream,
-  getLastCommandStream,
-} from './libs/common/deviceorientation-and-devicemotion/new-impl/get-motion-set-stream';
+import { debug3, getCommandHistoryStream, getLastCommandStream } from './motion-ui/motion-unit/get-motion-unit-stream';
 import { runOnDocumentReady } from './libs/common/run-on-document-ready';
 
 export const debug = () =>

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { DeviceMotion, DeviceMotionValue, DeviceMotionWithChange, PartialDeviceMotion } from '../../types';
-import { getRx } from '../../../rxjs';
+import { getRx } from '../../../libs/common/rxjs';
 import { getDifference } from './get-difference';
 import { calculateAverage } from './calculate-average';
 import { isEntireDeviceMotion } from './is-entire';

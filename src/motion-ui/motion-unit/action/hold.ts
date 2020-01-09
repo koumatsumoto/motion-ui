@@ -1,11 +1,11 @@
-import { Movement } from '../movement/classify-movement';
+import { MotionUnit } from '../internal/classify-movement';
 
 export const stoppingCount = 4;
 export const shortHoldCount = 7;
 export const motionEnteringCount = 8;
 export const longHoldCount = 10;
 
-const checkHold = (movements: Movement[]): 'long hold' | 'short hold' | 'stopping' | null => {
+const checkHold = (movements: MotionUnit[]): 'long hold' | 'short hold' | 'stopping' | null => {
   let consecutive = 0;
   // check value from right
   for (let i = movements.length - 1; i >= 0; i--) {
@@ -27,7 +27,7 @@ const checkHold = (movements: Movement[]): 'long hold' | 'short hold' | 'stoppin
   }
 };
 
-const isConsecutiveZero = (movements: Movement[], length: number): boolean => {
+const isConsecutiveZero = (movements: MotionUnit[], length: number): boolean => {
   if (movements.length !== length) {
     return false;
   }
@@ -47,7 +47,7 @@ const isConsecutiveZero = (movements: Movement[], length: number): boolean => {
  *
  * @param movements
  */
-export const isShortHold = (movements: Movement[]): boolean => {
+export const isShortHold = (movements: MotionUnit[]): boolean => {
   return isConsecutiveZero(movements, shortHoldCount);
 };
 
@@ -57,7 +57,7 @@ export const isShortHold = (movements: Movement[]): boolean => {
  *
  * @param movements
  */
-export const checkEnterMotionType = (movements: Movement[]): 'quick start' | 'slow start' | null => {
+export const checkEnterMotionType = (movements: MotionUnit[]): 'quick start' | 'slow start' | null => {
   if (movements.length < motionEnteringCount) {
     return null;
   }
@@ -74,7 +74,7 @@ export const checkEnterMotionType = (movements: Movement[]): 'quick start' | 'sl
 };
 
 export const checkHoldAndEntering = (
-  movements: Movement[],
+  movements: MotionUnit[],
 ): 'long hold' | 'short hold' | 'stopping' | 'quick start' | 'slow start' | null => {
   const hold = checkHold(movements);
   if (hold) {
@@ -90,7 +90,7 @@ export const checkHoldAndEntering = (
  *
  * @param movements
  */
-export const isLongHold = (movements: Movement[]): boolean => {
+export const isLongHold = (movements: MotionUnit[]): boolean => {
   return isConsecutiveZero(movements, longHoldCount);
 };
 
@@ -100,6 +100,6 @@ export const isLongHold = (movements: Movement[]): boolean => {
  *
  * @param movements
  */
-export const isStopping = (movements: Movement[]): boolean => {
+export const isStopping = (movements: MotionUnit[]): boolean => {
   return isConsecutiveZero(movements, stoppingCount);
 };
