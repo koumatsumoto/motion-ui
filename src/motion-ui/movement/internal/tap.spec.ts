@@ -1,4 +1,4 @@
-import { MotionUnit } from '../internal/classify-movement';
+import { MotionUnit } from '../../motion-unit';
 import { isTap } from './tap';
 import { createMovements } from './test-helpers';
 

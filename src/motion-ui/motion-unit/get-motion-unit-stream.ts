@@ -4,7 +4,8 @@ import { getDeviceOrientationStream } from '../deviceorientation/get-device-orie
 import { getDeviceMotionStream } from '../devicemotion';
 import { getRx } from '../../libs/common/rxjs';
 import { summarize } from './internal/summarize';
-import { MotionUnit, unify } from './internal/classify-movement';
+import { unify } from './internal/classify-movement';
+import { MotionUnit } from './types';
 
 export const getMotionUnitStream = (
   orientation$: Observable<DeviceOrientation> = getDeviceOrientationStream(),

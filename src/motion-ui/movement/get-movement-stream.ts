@@ -1,11 +1,11 @@
-import { ActionTypes } from '../motion-unit/types';
 import { getRx, withHistory } from '../../libs/common/rxjs';
-import { checkHoldAndEntering } from '../motion-unit/movement/hold';
-import { isQuickReverse } from '../motion-unit/movement/reverse';
 import { getMotionUnitStream } from '../motion-unit';
+import { checkHoldAndEntering } from './internal/hold';
+import { isQuickReverse } from './internal/reverse';
+import { MovementTypes } from './types';
 
 export type Movement = {
-  type: ActionTypes;
+  type: MovementTypes;
   // [first, last]
   sid?: number[];
 };

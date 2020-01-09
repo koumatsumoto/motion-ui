@@ -1,4 +1,4 @@
-import { MotionUnit } from '../internal/classify-movement';
+import { MotionUnit } from '../../motion-unit';
 import { contain, simplifyMovements } from './util';
 
 describe('simplifyMovements', () => {

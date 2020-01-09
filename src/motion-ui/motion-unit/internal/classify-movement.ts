@@ -1,3 +1,4 @@
+import { MotionUnit } from '../types';
 import { Summary } from './summarize';
 
 type Threshold = {
@@ -18,15 +19,6 @@ export const defaultThreshold: Threshold = {
   tap: 38,
   low: 20,
   round: 10,
-};
-
-export type MotionUnit = {
-  orientation: 'up' | 'down';
-  direction: 'up' | 'down';
-  // stopping, slightly, low, mid, high
-  rate: 0 | 1 | 2 | 3 | 4 | 5;
-  // all direction of value change is same
-  align: boolean;
 };
 
 const calcRate = (value: number, threshold: Threshold) => {

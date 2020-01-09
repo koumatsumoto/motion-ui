@@ -1,5 +1,5 @@
-import { MotionUnit } from '../internal/classify-movement';
 import { within } from '../../../libs/common/arithmetic';
+import { MotionUnit } from '../../motion-unit';
 import { simplifyMovements } from './util';
 
 /**

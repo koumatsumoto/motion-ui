@@ -1,4 +1,4 @@
-import { MotionUnit } from '../internal/classify-movement';
+import { MotionUnit } from '../../motion-unit';
 
 export const stoppingCount = 4;
 export const shortHoldCount = 7;

@@ -1,4 +1,4 @@
-import { MotionUnit } from '../internal/classify-movement';
+import { MotionUnit } from '../../motion-unit';
 
 const createMovement = (value: number, direction: MotionUnit['direction'] = 'up'): MotionUnit => {
   let rate = value;
