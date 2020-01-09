@@ -54,28 +54,6 @@ export type DeviceMotionWithChange = {
   change: DeviceMotionValue;
 };
 
-export type ValueAndChange = [number, number]; // [value, change from previous]
-export type DeviceMotionAsTuple = {
-  acceleration: {
-    readonly x: ValueAndChange;
-    readonly y: ValueAndChange;
-    readonly z: ValueAndChange;
-  };
-  accelerationIncludingGravity: {
-    readonly x: ValueAndChange;
-    readonly y: ValueAndChange;
-    readonly z: ValueAndChange;
-  };
-  rotationRate: {
-    readonly alpha: ValueAndChange;
-    readonly beta: ValueAndChange;
-    readonly gamma: ValueAndChange;
-  };
-};
-
-// Allowed precision in this library
-export type Precision = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
 // data provided from window deviceorientation event
 export type PartialDeviceOrientation = {
   readonly absolute: boolean;
@@ -90,19 +68,6 @@ export type DeviceOrientation = {
   readonly alpha: number;
   readonly beta: number;
   readonly gamma: number;
-};
-
-export type DeviceOrientationValue = {
-  readonly alpha: number;
-  readonly beta: number;
-  readonly gamma: number;
-};
-
-export type OrientationAndMotion = {
-  orientation: DeviceOrientation;
-  acceleration: DeviceMotionAsTuple['acceleration'];
-  accelerationIncludingGravity: DeviceMotionAsTuple['accelerationIncludingGravity'];
-  rotationRate: DeviceMotionAsTuple['rotationRate'];
 };
 
 // TODO: add mid
@@ -127,15 +92,5 @@ export type MotionSummary = {
     readonly alpha: SummaryValue;
     readonly beta: SummaryValue;
     readonly gamma: SummaryValue;
-  };
-};
-
-export type OrientationAndMotionSummary = {
-  orientation: DeviceOrientation;
-  motion: {
-    interval: DeviceMotion['interval'];
-    acceleration: MotionSummary['acceleration'];
-    accelerationIncludingGravity: MotionSummary['accelerationIncludingGravity'];
-    rotationRate: MotionSummary['rotationRate'];
   };
 };
