@@ -1,5 +1,5 @@
-import { debug3, getCommandHistoryStream, getLastCommandStream } from './motion-ui/motion-unit/get-motion-unit-stream';
 import { runOnDocumentReady } from './libs/common/run-on-document-ready';
+import { debug3, getCommandHistoryStream, getLastCommandStream } from './motion-ui/to-debug';
 
 export const debug = () =>
   runOnDocumentReady(() => {

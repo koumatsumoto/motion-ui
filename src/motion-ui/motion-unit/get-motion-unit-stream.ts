@@ -2,12 +2,9 @@ import { Observable } from 'rxjs';
 import { DeviceMotion, DeviceOrientation } from '../types';
 import { getDeviceOrientationStream } from '../deviceorientation/get-device-orientation-stream';
 import { getDeviceMotionStream } from '../devicemotion';
-import { getRx, withHistory } from '../../libs/common/rxjs';
+import { getRx } from '../../libs/common/rxjs';
 import { summarize } from './internal/summarize';
-import { ActionTypes } from './types';
-import { unify, MotionUnit } from './internal/classify-movement';
-import { checkHoldAndEntering } from './action/hold';
-import { isQuickReverse } from './action/reverse';
+import { MotionUnit, unify } from './internal/classify-movement';
 
 export const getMotionUnitStream = (
   orientation$: Observable<DeviceOrientation> = getDeviceOrientationStream(),
@@ -30,105 +27,4 @@ export const getMotionUnitStream = (
       };
     }),
   );
-};
-
-export const debug3 = () => {
-  const { filter, map } = getRx().operators;
-
-  return getMotionUnitStream().pipe(
-    filter((d) => d.data.rate > 0),
-    map((d) => {
-      const di = d.data.direction === 'up' ? 'u' : 'd';
-      return `${di}-${d.data.rate}: ${d.sid}`;
-    }),
-    withHistory(20),
-    map((array) => array.reverse()),
-  );
-};
-
-type Action = {
-  type: ActionTypes;
-  // [first, last]
-  sid?: number[];
-};
-
-export const getActionStream = () => {
-  const { Observable } = getRx();
-  const { map } = getRx().operators;
-  const movementCount = 10;
-
-  return new Observable<Action>((subscriber) => {
-    getMotionUnitStream()
-      .pipe(
-        withHistory(movementCount),
-        map((items) => {
-          const movements = items.map((m) => m.data);
-          const sid = [items[0].sid, items[items.length - 1].sid];
-
-          const type = checkHoldAndEntering(movements);
-          if (type) {
-            return {
-              type,
-              sid,
-            };
-          }
-
-          if (isQuickReverse(movements.slice(-2))) {
-            return {
-              type: 'quick reverse',
-              sid,
-            };
-          }
-
-          return {
-            type: 'moving',
-            sid,
-          };
-        }),
-      )
-      .subscribe((value) => {
-        subscriber.next(value as Action);
-      });
-  });
-};
-
-export const getCommandHistoryStream = () => {
-  const { map } = getRx().operators;
-
-  return getActionStream().pipe(
-    withHistory(32),
-    map((values) => values.map((v) => v.type).reverse()),
-  );
-};
-
-export const getLastCommandStream = () => {
-  const { distinctUntilChanged, map } = getRx().operators;
-
-  return getActionStream().pipe(
-    map((v) => v.type),
-    distinctUntilChanged(),
-    withHistory(8),
-    map((values) => values.reverse()),
-  );
-};
-
-type Command = {
-  type: string;
-  // [first, last]
-  sid?: number[];
-};
-
-export const getCommandStream = () => {
-  const { Observable } = getRx();
-  const { map } = getRx().operators;
-  const actionCount = 6;
-
-  return new Observable<Action>((subscriber) => {
-    getActionStream().pipe(
-      withHistory(actionCount),
-      map((action) => {
-        // not implemented
-      }),
-    );
-  });
 };
