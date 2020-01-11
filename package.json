@@ -9,6 +9,7 @@
     "build:dev": "yarn :build:dev:ts",
     "build:prod": "yarn build:prod:ts",
     "build:prod:ts": "webpack --config webpack.config.prod.js",
+    "build:version": "echo \"export const version = '`git rev-parse HEAD`'\" > version.ts",
     "check:build:tsc": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.json --noEmit",
     "check:diff": "git diff --exit-code --name-only ./src",
     "ci:check": "yarn ci:check:build && yarn ci:check:test && yarn ci:check:lint",
@@ -23,7 +24,8 @@
     "test:unit": "yarn jest -c jest.config.js",
     "ts-node": "node --max-old-space-size=8000 node_modules/.bin/ts-node --project tsconfig.json",
     ":build:dev:ts": "webpack --config webpack.config.dev.js",
-    ":build:dev:ts:watch": "yarn :build:dev:ts -w"
+    ":build:dev:ts:watch": "yarn :build:dev:ts -w",
+    "prepare": "yarn build:version"
   },
   "engines": {
     "node": ">= 13.0.0",
