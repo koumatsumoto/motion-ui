@@ -20,6 +20,27 @@ const createInputs = (lastThree: FixedLengthArray<MotionUnit, 3>): MovingMovemen
 };
 
 describe('detectMovingMovement', () => {
+  it('should detect starting move', () => {
+    expect(
+      detectMovingMovement(
+        createInputs([
+          createMotionUnit({ direction: 'up', rate: 0 }),
+          createMotionUnit({ direction: 'up', rate: 0 }),
+          createMotionUnit({ direction: 'up', rate: 1 }),
+        ]),
+      ),
+    ).toBe('slow start');
+    expect(
+      detectMovingMovement(
+        createInputs([
+          createMotionUnit({ direction: 'up', rate: 0 }),
+          createMotionUnit({ direction: 'up', rate: 0 }),
+          createMotionUnit({ direction: 'up', rate: 2 }),
+        ]),
+      ),
+    ).toBe('quick start');
+  });
+
   it('should detect a return', () => {
     expect(
       detectMovingMovement(

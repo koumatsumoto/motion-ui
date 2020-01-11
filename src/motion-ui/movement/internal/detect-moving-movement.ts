@@ -2,7 +2,7 @@ import { MovingMovementInput } from '../types';
 import { firstMoveIndex, secondMoveIndex, thirdMoveIndex } from '../constants';
 import { simplifyMovements } from './util';
 
-type MovingMovementTypes = 'just return' | 'over return' | 'moving';
+type MovingMovementTypes = 'quick start' | 'slow start' | 'just return' | 'over return' | 'moving';
 
 /**
  * @param inputs
@@ -14,7 +14,12 @@ export const detectMovingMovement = (inputs: MovingMovementInput): MovingMovemen
   const second = values[1];
   const third = values[2];
 
-  if (first.rate === 0 || first.rate === 1) {
+  // start moving
+  if (first.rate === 0 && second.rate === 0) {
+    return 1 < third.rate ? 'quick start' : 'slow start';
+  }
+
+  if (first.rate < 2) {
     if (3 <= Math.abs(second.rate)) {
       if (3 <= Math.abs(third.rate - second.rate)) {
         if (third.rate === 0) {

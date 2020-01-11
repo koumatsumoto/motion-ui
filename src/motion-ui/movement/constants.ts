@@ -9,8 +9,6 @@ export const longHoldCount = inputCount;
 export const shortHoldCount = 7;
 // [..., 0, 0, 0]
 export const stoppingCount = 3;
-// [..., 1, 0, 0]
-export const startingIndex = inputCount - stoppingCount;
 
 // these are for moving detection
 export const firstMoveIndex = inputCount - stoppingCount;

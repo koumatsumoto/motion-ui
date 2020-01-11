@@ -1,4 +1,4 @@
-import { detectStopAndStartMovement } from './detect-stop-and-start-movement';
+import { detectStoppingMovement } from './detect-stopping-movement';
 
 describe('detectStopAndStartMovement', () => {
   it('should work', () => {
@@ -11,10 +11,10 @@ describe('detectStopAndStartMovement', () => {
     const slowStart: any = [zero, zero, zero, zero, zero, zero, zero, one, zero, zero];
     const quickStart: any = [zero, zero, zero, zero, zero, zero, zero, gtOne, zero, zero];
 
-    expect(detectStopAndStartMovement(longHold)).toBe('long hold');
-    expect(detectStopAndStartMovement(shortHold)).toBe('short hold');
-    expect(detectStopAndStartMovement(stopping)).toBe('stopping');
-    expect(detectStopAndStartMovement(slowStart)).toBe('slow start');
-    expect(detectStopAndStartMovement(quickStart)).toBe('quick start');
+    expect(detectStoppingMovement(longHold)).toBe('long hold');
+    expect(detectStoppingMovement(shortHold)).toBe('short hold');
+    expect(detectStoppingMovement(stopping)).toBe('stopping');
+    expect(detectStoppingMovement(slowStart)).toBe('slow start');
+    expect(detectStoppingMovement(quickStart)).toBe('quick start');
   });
 });

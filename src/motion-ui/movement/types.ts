@@ -20,7 +20,7 @@ export type StoppingMovementInput = [
   MotionUnit,
   MotionUnit,
   MotionUnit,
-  MotionUnit,
+  ZeroRateMotionUnit,
   ZeroRateMotionUnit,
   ZeroRateMotionUnit,
 ];
