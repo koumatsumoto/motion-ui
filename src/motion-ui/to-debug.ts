@@ -1,5 +1,5 @@
 import { getRx, withHistory } from '../libs/common/rxjs';
-import { getMovementStream, Movement } from './movement';
+import { getMovementStream, MovementStreamOutput } from './movement';
 import { getMotionUnitStream } from './motion-unit';
 
 export const debug3 = () => {
@@ -47,7 +47,7 @@ export const getCommandStream = () => {
   const { map } = getRx().operators;
   const actionCount = 6;
 
-  return new Observable<Movement>((subscriber) => {
+  return new Observable<MovementStreamOutput>((subscriber) => {
     getMovementStream().pipe(
       withHistory(actionCount),
       map((action) => {

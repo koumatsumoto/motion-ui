@@ -1,5 +1,6 @@
 import { DeepPartial } from '../types';
-import { DeviceMotionValue, PartialDeviceMotion, DeviceMotion, PartialDeviceOrientation } from './types';
+import { DeviceMotion, DeviceMotionValue, PartialDeviceMotion, PartialDeviceOrientation } from './types';
+import { MotionUnit } from './motion-unit';
 
 /**
  * For Testing
@@ -68,6 +69,20 @@ export const createTestingPartialDeviceOrientation = (param: Partial<PartialDevi
     beta: 1,
     gamma: 1,
     absolute: true,
+    ...param,
+  };
+};
+
+export const defaultMotionUnit: MotionUnit = {
+  orientation: 'up',
+  direction: 'up',
+  rate: 0,
+  align: false,
+};
+
+export const createMotionUnit = (param: Partial<MotionUnit>): MotionUnit => {
+  return {
+    ...defaultMotionUnit,
     ...param,
   };
 };

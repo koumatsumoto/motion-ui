@@ -1,51 +1,31 @@
+import { Observable } from 'rxjs';
 import { getRx, withHistory } from '../../libs/common/rxjs';
 import { getMotionUnitStream } from '../motion-unit';
-import { checkHoldAndEntering } from './internal/hold';
-import { isQuickReverse } from './internal/reverse';
-import { MovementTypes } from './types';
+import { MovementInput, MovementStreamOutput } from './types';
+import { inputCount } from './constants';
+import { detectMovement } from './internal/detect-movement';
 
-export type Movement = {
-  type: MovementTypes;
-  // [first, last]
-  sid?: number[];
-};
-
-export const getMovementStream = () => {
+export const getMovementStream = (): Observable<MovementStreamOutput> => {
   const { Observable } = getRx();
   const { map } = getRx().operators;
-  const movementCount = 10;
 
-  return new Observable<Movement>((subscriber) => {
+  return new Observable<MovementStreamOutput>((subscriber) => {
     getMotionUnitStream()
       .pipe(
-        withHistory(movementCount),
+        withHistory(inputCount),
         map((items) => {
-          const movements = items.map((m) => m.data);
+          const movements = items.map((m) => m.data) as MovementInput;
           const sid = [items[0].sid, items[items.length - 1].sid];
-
-          const type = checkHoldAndEntering(movements);
-          if (type) {
-            return {
-              type,
-              sid,
-            };
-          }
-
-          if (isQuickReverse(movements.slice(-2))) {
-            return {
-              type: 'quick reverse',
-              sid,
-            };
-          }
+          const type = detectMovement(movements);
 
           return {
-            type: 'moving',
+            type,
             sid,
-          };
+          } as MovementStreamOutput;
         }),
       )
       .subscribe((value) => {
-        subscriber.next(value as Movement);
+        subscriber.next(value);
       });
   });
 };

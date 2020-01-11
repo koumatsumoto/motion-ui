@@ -5,12 +5,12 @@ import { getDeviceMotionStream } from '../devicemotion';
 import { getRx } from '../../libs/common/rxjs';
 import { summarize } from './internal/summarize';
 import { unify } from './internal/classify-movement';
-import { MotionUnit } from './types';
+import { MotionUnitStreamOutput } from './types';
 
 export const getMotionUnitStream = (
   orientation$: Observable<DeviceOrientation> = getDeviceOrientationStream(),
   motion$: Observable<DeviceMotion> = getDeviceMotionStream(),
-): Observable<{ sid: number; data: MotionUnit }> => {
+): Observable<MotionUnitStreamOutput> => {
   const { bufferCount, map, withLatestFrom } = getRx().operators;
 
   let sid = 0;

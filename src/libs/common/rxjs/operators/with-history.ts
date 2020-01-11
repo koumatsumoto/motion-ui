@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs';
 import { getRx } from '../index';
+import { FixedLengthArray } from '../../../../types';
 
-export const withHistory = (n: number) => <T>(source: Observable<T>) => {
+export const withHistory = <L extends number>(n: L) => <T>(source: Observable<T>): Observable<FixedLengthArray<T, L>> => {
   const { Observable } = getRx();
 
-  return new Observable<T[]>((subscriber) => {
+  return new Observable<FixedLengthArray<T, L>>((subscriber) => {
     const values: T[] = [];
     return source.subscribe({
       next(x: T) {
@@ -12,11 +13,11 @@ export const withHistory = (n: number) => <T>(source: Observable<T>) => {
 
         if (values.length > n) {
           values.shift();
-          subscriber.next([...values]);
+          subscriber.next([...values] as FixedLengthArray<T, L>);
         } else if (values.length < n) {
           return;
         } else {
-          subscriber.next([...values]);
+          subscriber.next([...values] as FixedLengthArray<T, L>);
         }
       },
       error(err: Error) {

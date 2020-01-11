@@ -10,3 +10,8 @@ export type DeepPartial<T> = {
 };
 export type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
+
+export interface FixedLengthArray<T extends any, L extends number> extends Array<T> {
+  0: T;
+  length: number;
+}
