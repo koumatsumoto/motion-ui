@@ -28,4 +28,4 @@ git commit -m "commit by deploy script";
 # deploy to GitHub Page
 git push -f deploy deploy:master;
 # back to master branch
-git checkout -f master
+git checkout -f $BRANCH;
