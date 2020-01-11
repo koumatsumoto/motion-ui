@@ -16,7 +16,7 @@
     "ci:check:build": "yarn check:build:tsc && yarn build:prod:ts",
     "ci:check:lint": "yarn format && yarn check:diff",
     "ci:check:test": "yarn test:unit --ci --silent --detectOpenHandles --forceExit --collectCoverage",
-    "deploy": "yarn build:prod && cp dist/bundle.min.js docs/bundle.min.js && yarn check:diff && git push -f deploy \"$(git rev-parse --abbrev-ref HEAD)\":master",
+    "deploy": "sh deploy.sh",
     "format": "yarn lint:ts --fix && prettier --config .prettierrc --write '{docs,src,.circleci}/**/*.{ts,js,scss,html,md,yml}' ./*.{js,json}",
     "lint:ts": "eslint 'src/**/*.ts'",
     "jest": "node --max_old_space_size=4096 ./node_modules/.bin/jest",
