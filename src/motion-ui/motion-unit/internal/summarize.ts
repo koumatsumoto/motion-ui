@@ -1,5 +1,5 @@
-import { Writeable } from '../../../types';
 import { roundToInt } from '../../../libs/common/arithmetic';
+import { Writeable } from '../../../types';
 
 /**
  * NOTE:

@@ -1,7 +1,7 @@
 import { MovementInput, NewMovementTypes } from '../types';
-import { isStoppingMovementInput } from './is-stopping-movement-input';
-import { detectStoppingMovement } from './detect-stopping-movement';
 import { detectMovingMovement } from './detect-moving-movement';
+import { detectStoppingMovement } from './detect-stopping-movement';
+import { isStoppingMovementInput } from './is-stopping-movement-input';
 
 export const detectMovement = (units: MovementInput): NewMovementTypes => {
   if (isStoppingMovementInput(units)) {

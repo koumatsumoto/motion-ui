@@ -1,6 +1,6 @@
 import { getRx, withHistory } from '../libs/common/rxjs';
-import { getMovementStream, MovementStreamOutput } from './movement';
 import { getMotionUnitStream } from './motion-unit';
+import { getMovementStream, MovementStreamOutput } from './movement';
 
 export const debug3 = () => {
   const { filter, map } = getRx().operators;

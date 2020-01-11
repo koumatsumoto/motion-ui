@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
-import { DeviceMotion, DeviceMotionValue } from '../../types';
 import { createTestingDeviceMotion, createTestingDeviceMotionValue } from '../../test-helpers';
+import { DeviceMotion, DeviceMotionValue } from '../../types';
 import { toAverage, withChange } from './rx-operators';
 
 describe('rx-operators', () => {

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { getRx } from '../index';
 import { FixedLengthArray } from '../../../../types';
+import { getRx } from '../index';
 
 export const withHistory = <L extends number>(n: L) => <T>(source: Observable<T>): Observable<FixedLengthArray<T, L>> => {
   const { Observable } = getRx();

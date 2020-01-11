@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
-import { DeviceMotion, DeviceOrientation } from '../types';
-import { getDeviceOrientationStream } from '../deviceorientation/get-device-orientation-stream';
-import { getDeviceMotionStream } from '../devicemotion';
 import { getRx } from '../../libs/common/rxjs';
-import { summarize } from './internal/summarize';
+import { getDeviceMotionStream } from '../devicemotion';
+import { getDeviceOrientationStream } from '../deviceorientation/get-device-orientation-stream';
+import { DeviceMotion, DeviceOrientation } from '../types';
 import { unify } from './internal/classify-movement';
+import { summarize } from './internal/summarize';
 import { MotionUnitStreamOutput } from './types';
 
 export const getMotionUnitStream = (

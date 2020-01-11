@@ -1,5 +1,5 @@
-import { StoppingMovementInput } from '../types';
 import { MotionUnit } from '../../motion-unit';
+import { StoppingMovementInput } from '../types';
 
 export const isStoppingMovementInput = (units: MotionUnit[]): units is StoppingMovementInput => {
   return (

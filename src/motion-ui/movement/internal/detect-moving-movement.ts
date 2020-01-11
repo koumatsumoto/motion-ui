@@ -1,5 +1,5 @@
-import { MovingMovementInput } from '../types';
 import { firstMoveIndex, fourthMoveIndex, secondMoveIndex, thirdMoveIndex } from '../constants';
+import { MovingMovementInput } from '../types';
 import { simplifyMovements } from './util';
 
 type MovingMovementTypes = 'quick start' | 'slow start' | 'just return' | 'over return' | 'moving';

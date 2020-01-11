@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
-import { DeviceMotion, DeviceMotionValue, DeviceMotionWithChange, PartialDeviceMotion } from '../../types';
 import { getRx } from '../../../libs/common/rxjs';
-import { getDifference } from './get-difference';
+import { DeviceMotion, DeviceMotionValue, DeviceMotionWithChange, PartialDeviceMotion } from '../../types';
 import { calculateAverage } from './calculate-average';
+import { getDifference } from './get-difference';
 import { isEntireDeviceMotion } from './is-entire';
 
 // TODO: use pairwise

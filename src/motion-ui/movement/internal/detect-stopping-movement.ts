@@ -1,5 +1,5 @@
-import { StoppingMovementInput } from '../types';
 import { longHoldCount, shortHoldCount } from '../constants';
+import { StoppingMovementInput } from '../types';
 
 export type StoppingMovementTypes = 'long hold' | 'short hold' | 'stopping';
 

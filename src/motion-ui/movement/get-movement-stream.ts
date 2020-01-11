@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { getRx, withHistory } from '../../libs/common/rxjs';
 import { getMotionUnitStream } from '../motion-unit';
-import { MovementInput, MovementStreamOutput } from './types';
 import { inputCount } from './constants';
 import { detectMovement } from './internal/detect-movement';
+import { MovementInput, MovementStreamOutput } from './types';
 
 export const getMovementStream = (): Observable<MovementStreamOutput> => {
   const { Observable } = getRx();

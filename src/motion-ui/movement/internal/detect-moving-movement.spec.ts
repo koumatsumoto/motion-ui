@@ -1,6 +1,6 @@
-import { createMotionUnit, defaultMotionUnit } from '../../test-helpers';
 import { FixedLengthArray } from '../../../types';
 import { MotionUnit } from '../../motion-unit';
+import { createMotionUnit, defaultMotionUnit } from '../../test-helpers';
 import { MovingMovementInput } from '../types';
 import { detectMovingMovement } from './detect-moving-movement';
 

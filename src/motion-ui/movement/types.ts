@@ -1,5 +1,5 @@
-import { MotionUnit, ZeroRateMotionUnit } from '../motion-unit';
 import { FixedLengthArray } from '../../types';
+import { MotionUnit, ZeroRateMotionUnit } from '../motion-unit';
 
 // deprecated, use NewMovementTypes
 export type MovementTypes = 'long hold' | 'short hold' | 'stopping' | 'quick start' | 'slow start';
