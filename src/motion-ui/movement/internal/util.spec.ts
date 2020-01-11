@@ -1,7 +1,7 @@
 import { MotionUnit } from '../../motion-unit';
-import { contain, simplifyMovements } from './util';
+import { contain, diff, linearize } from './util';
 
-describe('simplifyMovements', () => {
+describe('linearize', () => {
   const v = (rate: MotionUnit['rate'], direction: MotionUnit['direction']): MotionUnit => ({
     rate,
     direction,
@@ -10,7 +10,7 @@ describe('simplifyMovements', () => {
   });
 
   it('should work', () => {
-    expect(simplifyMovements([v(1, 'up'), v(1, 'down')])).toEqual([
+    expect(linearize([v(1, 'up'), v(1, 'down')])).toEqual([
       {
         rate: 1,
         align: true,
@@ -20,7 +20,7 @@ describe('simplifyMovements', () => {
         align: true,
       },
     ]);
-    expect(simplifyMovements([v(0, 'up'), v(0, 'down')])).toEqual([
+    expect(linearize([v(0, 'up'), v(0, 'down')])).toEqual([
       {
         rate: 0,
         align: true,
@@ -30,7 +30,7 @@ describe('simplifyMovements', () => {
         align: true,
       },
     ]);
-    expect(simplifyMovements([v(0, 'up'), v(0, 'down'), v(1, 'up')])).toEqual([
+    expect(linearize([v(0, 'up'), v(0, 'down'), v(1, 'up')])).toEqual([
       {
         align: true,
         rate: 0,
@@ -54,5 +54,18 @@ describe('contain', () => {
     expect(contain(source, [2, 3, 4])).toBe(true);
     expect(contain(source, [0, 1, 3])).toBe(false);
     expect(contain(source, [3, 4, 5])).toBe(false);
+  });
+});
+
+describe('diff', () => {
+  it('should work', () => {
+    expect(diff(3, 1)).toBe(2);
+    expect(diff(1, 3)).toBe(2);
+    expect(diff(0, 0)).toBe(0);
+    expect(diff(3, -1)).toBe(4);
+    expect(diff(-1, 3)).toBe(4);
+    expect(diff(-1, -1)).toBe(0);
+    expect(diff(-3, -1)).toBe(2);
+    expect(diff(-1, -3)).toBe(2);
   });
 });

@@ -1,6 +1,6 @@
 import { within } from '../../../libs/common/arithmetic';
 import { MotionUnit } from '../../motion-unit';
-import { simplifyMovements } from './util';
+import { linearize } from './util';
 
 /**
  *
@@ -28,7 +28,7 @@ export const isTap = (movements: MotionUnit[]): boolean => {
     return false;
   }
 
-  const values = simplifyMovements(movements);
+  const values = linearize(movements);
   const first = values[0];
   const second = values[1];
   const third = values[2];

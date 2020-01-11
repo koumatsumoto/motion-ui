@@ -1,6 +1,6 @@
 import { firstMoveIndex, fourthMoveIndex, secondMoveIndex, thirdMoveIndex } from '../constants';
 import { MovingMovementInput } from '../types';
-import { simplifyMovements } from './util';
+import { linearize } from './util';
 
 type MovingMovementTypes = 'quick start' | 'slow start' | 'just return' | 'over return' | 'moving';
 
@@ -9,7 +9,7 @@ type MovingMovementTypes = 'quick start' | 'slow start' | 'just return' | 'over 
  */
 export const detectMovingMovement = (inputs: MovingMovementInput): MovingMovementTypes => {
   // convert relative rate like as [1, -3, 2] (first value is always positive or zero)
-  const values = simplifyMovements([inputs[firstMoveIndex], inputs[secondMoveIndex], inputs[thirdMoveIndex], inputs[fourthMoveIndex]]);
+  const values = linearize([inputs[firstMoveIndex], inputs[secondMoveIndex], inputs[thirdMoveIndex], inputs[fourthMoveIndex]]);
   const first = values[0];
   const second = values[1];
   const third = values[2];

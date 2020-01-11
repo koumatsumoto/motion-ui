@@ -1,13 +1,14 @@
+import { FixedLengthArray, LengthOf } from '../../../types';
 import { MotionUnit } from '../../motion-unit';
 
-export type RelativeMovement = {
+export type LinearizedMovement = {
   rate: -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5;
   // all direction of value change is same
   align: boolean;
 };
 
-export const simplifyMovements = (movements: MotionUnit[]): RelativeMovement[] => {
-  if (movements.length < 1) {
+export const linearize = <T extends MotionUnit[]>(movements: T): FixedLengthArray<LinearizedMovement, LengthOf<T>> => {
+  if (movements.length === 0) {
     return [];
   }
 
@@ -25,7 +26,7 @@ export const simplifyMovements = (movements: MotionUnit[]): RelativeMovement[] =
     } else {
       return {
         // avoid -0
-        rate: m.rate === 0 ? 0 : (-m.rate as RelativeMovement['rate']),
+        rate: m.rate === 0 ? 0 : (-m.rate as LinearizedMovement['rate']),
         align: m.align,
       };
     }
@@ -50,4 +51,24 @@ export const contain = (source: number[], pattern: number[]): boolean => {
   }
 
   return false;
+};
+
+export const diff = (x: number, y: number) => {
+  switch (true) {
+    case 0 <= x && 0 <= y: {
+      return x < y ? y - x : x - y;
+    }
+    case 0 <= x && y < 0: {
+      return x - y;
+    }
+    case x < 0 && 0 <= y: {
+      return y - x;
+    }
+    case x < 0 && y < 0: {
+      return x < y ? y - x : x - y;
+    }
+    default: {
+      throw new Error('Unreachable');
+    }
+  }
 };
