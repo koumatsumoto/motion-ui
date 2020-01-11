@@ -11,7 +11,7 @@ export const debug3 = () => {
       const di = d.data.direction === 'up' ? 'u' : 'd';
       return `${di}-${d.data.rate}: ${d.sid}`;
     }),
-    withHistory(20),
+    withHistory(32),
     map((array) => array.reverse()),
   );
 };
@@ -31,7 +31,7 @@ export const getLastCommandStream = () => {
   return getMovementStream().pipe(
     map((v) => v.type),
     distinctUntilChanged(),
-    withHistory(20),
+    withHistory(32),
     map((values) => values.reverse()),
   );
 };
