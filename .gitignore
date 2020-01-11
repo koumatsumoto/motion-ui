@@ -65,4 +65,5 @@ typings/
 
 # build result
 /dist
-version.ts
+/version.ts
+/docs/bundle.min.js

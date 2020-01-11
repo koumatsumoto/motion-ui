@@ -9,10 +9,9 @@
     "build:dev": "yarn :build:dev:ts",
     "build:prod": "yarn build:prod:ts",
     "build:prod:ts": "webpack --config webpack.config.prod.js",
-    "prebuild:prod:ts": "yarn build:version",
     "build:version": "echo \"export const version = '`git rev-parse HEAD`'\" > version.ts",
     "check:build:tsc": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.json --noEmit",
-    "check:diff": "git diff --exit-code --name-only ./src",
+    "check:diff": "git diff --exit-code --name-only ./",
     "ci:check": "yarn ci:check:build && yarn ci:check:test && yarn ci:check:lint",
     "ci:check:build": "yarn check:build:tsc && yarn build:prod:ts",
     "ci:check:lint": "yarn format && yarn check:diff",
@@ -26,6 +25,7 @@
     "ts-node": "node --max-old-space-size=8000 node_modules/.bin/ts-node --project tsconfig.json",
     ":build:dev:ts": "webpack --config webpack.config.dev.js",
     ":build:dev:ts:watch": "yarn :build:dev:ts -w",
+    "prebuild:prod:ts": "yarn build:version",
     "prepare": "yarn build:version"
   },
   "engines": {
