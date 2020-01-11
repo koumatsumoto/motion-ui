@@ -9,6 +9,7 @@
     "build:dev": "yarn :build:dev:ts",
     "build:prod": "yarn build:prod:ts",
     "build:prod:ts": "webpack --config webpack.config.prod.js",
+    "prebuild:prod:ts": "yarn build:version",
     "build:version": "echo \"export const version = '`git rev-parse HEAD`'\" > version.ts",
     "check:build:tsc": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.json --noEmit",
     "check:diff": "git diff --exit-code --name-only ./src",
