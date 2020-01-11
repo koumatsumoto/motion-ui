@@ -1,11 +1,10 @@
-import { version } from '../version';
 import { runOnDocumentReady } from './libs/common/run-on-document-ready';
 import { debug3, getCommandHistoryStream, getLastCommandStream } from './motion-ui/to-debug';
 
 export const displayVersion = () => {
   runOnDocumentReady(() => {
     const versionElem = document.getElementById('version')!;
-    versionElem.textContent = version;
+    versionElem.textContent = 'updated';
   });
 };
 
