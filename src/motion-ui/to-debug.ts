@@ -31,7 +31,7 @@ export const getLastCommandStream = () => {
   return getMovementStream().pipe(
     map((v) => v.type),
     distinctUntilChanged(),
-    withHistory(8),
+    withHistory(20),
     map((values) => values.reverse()),
   );
 };
