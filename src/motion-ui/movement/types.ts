@@ -1,4 +1,5 @@
-import { MotionUnit, NonZeroRateMotionUnit, ZeroRateMotionUnit } from '../motion-unit';
+import { MotionUnit, ZeroRateMotionUnit } from '../motion-unit';
+import { FixedLengthArray } from '../../types';
 
 // deprecated, use NewMovementTypes
 export type MovementTypes = 'long hold' | 'short hold' | 'stopping' | 'quick start' | 'slow start';
@@ -11,6 +12,7 @@ export type MovementStreamOutput = {
 };
 
 export type MovementInputCount = 10;
+export type MovingMovementInput = FixedLengthArray<MotionUnit, 10>;
 
 export type StoppingMovementInput = [
   MotionUnit,
@@ -23,19 +25,6 @@ export type StoppingMovementInput = [
   ZeroRateMotionUnit,
   ZeroRateMotionUnit,
   ZeroRateMotionUnit,
-];
-
-export type MovingMovementInput = [
-  MotionUnit,
-  MotionUnit,
-  MotionUnit,
-  MotionUnit,
-  MotionUnit,
-  MotionUnit,
-  MotionUnit,
-  MotionUnit,
-  NonZeroRateMotionUnit,
-  NonZeroRateMotionUnit,
 ];
 
 export type MovementInput = StoppingMovementInput | MovingMovementInput;

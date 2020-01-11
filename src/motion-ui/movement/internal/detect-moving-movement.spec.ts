@@ -4,7 +4,7 @@ import { MotionUnit } from '../../motion-unit';
 import { MovingMovementInput } from '../types';
 import { detectMovingMovement } from './detect-moving-movement';
 
-const createInputs = (lastThree: FixedLengthArray<MotionUnit, 3>): MovingMovementInput => {
+const createInputs = (lastFour: FixedLengthArray<MotionUnit, 4>): MovingMovementInput => {
   return [
     defaultMotionUnit,
     defaultMotionUnit,
@@ -12,10 +12,10 @@ const createInputs = (lastThree: FixedLengthArray<MotionUnit, 3>): MovingMovemen
     defaultMotionUnit,
     defaultMotionUnit,
     defaultMotionUnit,
-    defaultMotionUnit,
-    lastThree[0],
-    lastThree[1] as any,
-    lastThree[2] as any,
+    lastFour[0] as any,
+    lastFour[1] as any,
+    lastFour[2] as any,
+    lastFour[3] as any,
   ];
 };
 
@@ -26,6 +26,7 @@ describe('detectMovingMovement', () => {
         createInputs([
           createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 0 }),
+          createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 1 }),
         ]),
       ),
@@ -33,6 +34,7 @@ describe('detectMovingMovement', () => {
     expect(
       detectMovingMovement(
         createInputs([
+          createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 2 }),
@@ -46,6 +48,7 @@ describe('detectMovingMovement', () => {
       detectMovingMovement(
         createInputs([
           createMotionUnit({ direction: 'up', rate: 0 }),
+          createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 3 }),
           createMotionUnit({ direction: 'up', rate: 0 }),
         ]),
@@ -54,6 +57,7 @@ describe('detectMovingMovement', () => {
     expect(
       detectMovingMovement(
         createInputs([
+          createMotionUnit({ direction: 'down', rate: 0 }),
           createMotionUnit({ direction: 'down', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 3 }),
           createMotionUnit({ direction: 'down', rate: 1 }),
@@ -66,6 +70,7 @@ describe('detectMovingMovement', () => {
     expect(
       detectMovingMovement(
         createInputs([
+          createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 2 }),
           createMotionUnit({ direction: 'down', rate: 3 }),
           createMotionUnit({ direction: 'up', rate: 0 }),
@@ -75,6 +80,7 @@ describe('detectMovingMovement', () => {
     expect(
       detectMovingMovement(
         createInputs([
+          createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 0 }),
           createMotionUnit({ direction: 'up', rate: 3 }),
           createMotionUnit({ direction: 'up', rate: 1 }),

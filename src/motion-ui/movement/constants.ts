@@ -11,6 +11,7 @@ export const shortHoldCount = 7;
 export const stoppingCount = 3;
 
 // these are for moving detection
-export const firstMoveIndex = inputCount - stoppingCount;
-export const secondMoveIndex = inputCount - 2;
-export const thirdMoveIndex = inputCount - 1;
+export const firstMoveIndex = inputCount - 4;
+export const secondMoveIndex = inputCount - 3;
+export const thirdMoveIndex = inputCount - 2;
+export const fourthMoveIndex = inputCount - 1;
