@@ -18,7 +18,7 @@ if [ -z "$ORIGIN_CHECK" ]; then
 fi
 
 # if branch already exists, delete it
-if [ -z "$BRANCH_CHECK" ]; then
+if [ -n "$BRANCH_CHECK" ]; then
   git branch -D $DEPLOY_BRANCH;
 fi
 # checkout from current working branch
