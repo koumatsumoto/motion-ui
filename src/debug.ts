@@ -1,6 +1,6 @@
 import { version } from '../version';
 import { runOnDocumentReady } from './libs/common/run-on-document-ready';
-import { debug3, getCommandHistoryStream, getLastCommandStream } from './motion-ui/to-debug';
+import { debug3, debug4, getCommandHistoryStream, getLastCommandStream } from './motion-ui/to-debug';
 
 export const displayVersion = () => {
   runOnDocumentReady(() => {
@@ -50,6 +50,7 @@ export const debug = () =>
     getLastCommandStream().subscribe((d) => (data1 = d));
     getCommandHistoryStream().subscribe((d) => (data2 = d));
     debug3().subscribe((d) => (data3 = d));
+    debug4().subscribe((d) => (data4 = d));
 
     const loop = () => {
       if (data1) {

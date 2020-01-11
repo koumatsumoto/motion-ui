@@ -16,6 +16,19 @@ export const debug3 = () => {
   );
 };
 
+export const debug4 = () => {
+  const { map } = getRx().operators;
+
+  return getMotionUnitStream().pipe(
+    map((d) => {
+      const di = d.data.direction === 'up' ? 'u' : 'd';
+      return `${di}-${d.data.rate}: ${d.sid}`;
+    }),
+    withHistory(32),
+    map((array) => array.reverse()),
+  );
+};
+
 export const getCommandHistoryStream = () => {
   const { map } = getRx().operators;
 
