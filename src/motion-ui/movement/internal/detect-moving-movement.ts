@@ -1,4 +1,4 @@
-import { firstMoveIndex, fourthMoveIndex, secondMoveIndex, thirdMoveIndex } from '../constants';
+import { fourthLastIndex, lastIndex, thirdLastIndex, secondLastIndex } from '../constants';
 import { MovingMovementInput } from '../types';
 import { linearize } from './util';
 
@@ -9,21 +9,21 @@ type MovingMovementTypes = 'quick start' | 'slow start' | 'just return' | 'over 
  */
 export const detectMovingMovement = (inputs: MovingMovementInput): MovingMovementTypes => {
   // convert relative rate like as [1, -3, 2] (first value is always positive or zero)
-  const values = linearize([inputs[firstMoveIndex], inputs[secondMoveIndex], inputs[thirdMoveIndex], inputs[fourthMoveIndex]]);
+  const values = linearize([inputs[fourthLastIndex], inputs[thirdLastIndex], inputs[secondLastIndex], inputs[lastIndex]]);
   const first = values[0];
-  const second = values[1];
-  const third = values[2];
-  const fourth = values[3];
+  const thirdLast = values[1];
+  const secondLast = values[2];
+  const last = values[3];
 
   // start moving
-  if (first.rate === 0 && second.rate === 0 && third.rate === 0 && fourth.rate !== 0) {
-    return 1 < fourth.rate ? 'quick start' : 'slow start';
+  if (first.rate === 0 && thirdLast.rate === 0 && secondLast.rate === 0 && last.rate !== 0) {
+    return 1 < last.rate ? 'quick start' : 'slow start';
   }
 
-  if (second.rate < 2) {
-    if (3 <= Math.abs(third.rate)) {
-      if (3 <= Math.abs(fourth.rate - third.rate)) {
-        if (fourth.rate === 0) {
+  if (thirdLast.rate < 2) {
+    if (3 <= Math.abs(secondLast.rate)) {
+      if (3 <= Math.abs(last.rate - secondLast.rate)) {
+        if (last.rate === 0) {
           return 'just return';
         } else {
           return 'over return';
