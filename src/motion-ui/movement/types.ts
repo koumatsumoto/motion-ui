@@ -28,3 +28,8 @@ export type StoppingMovementInput = [
 ];
 
 export type MovementInput = StoppingMovementInput | MovingMovementInput;
+
+export type MovementOutput = {
+  type: 'close';
+  gradient: number;
+};
