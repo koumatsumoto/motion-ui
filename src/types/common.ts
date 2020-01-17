@@ -41,3 +41,6 @@ type Range<N, T extends number[] = []> = {
   0: T;
   1: Range<N, Unshift<T, LengthOf<T>>>;
 }[Equals<LengthOf<Tail<T>>, N> extends true ? 0 : 1];
+
+// branded type
+export type Brand<K, T> = K & { __brand: T };
