@@ -1,4 +1,4 @@
-import { FixedLengthArray } from '../../types';
+import { Brand, FixedLengthArray } from '../../types';
 import { MotionUnit, ZeroRateMotionUnit } from '../motion-unit';
 
 // deprecated, use NewMovementTypes
@@ -27,9 +27,12 @@ export type StoppingMovementInput = [
   ZeroRateMotionUnit,
 ];
 
+export type ClosedMovementInput = Brand<MovingMovementInput, 'MovingMovementInput'>;
+
 export type MovementInput = StoppingMovementInput | MovingMovementInput;
 
 export type MovementOutput = {
   type: 'close';
-  gradient: number;
+  closingGradient: number;
+  openingGradient: number | null;
 };
