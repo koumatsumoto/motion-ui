@@ -27,8 +27,6 @@ export type StoppingMovementInput = [
   ZeroRateMotionUnit,
 ];
 
-export type ClosedMovementInput = Brand<MovingMovementInput, 'MovingMovementInput'>;
-
 export type MovementInput = StoppingMovementInput | MovingMovementInput;
 
 export type MovementOutput = {

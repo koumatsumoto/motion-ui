@@ -1,5 +1,5 @@
-import { MotionUnit } from '../../motion-unit';
-import { createMotionUnit } from '../../test-helpers';
+import { MotionUnit } from '../../../motion-unit';
+import { createMotionUnit } from '../../../test-helpers';
 import { isClosed } from './is-closed';
 
 describe('isClosed', () => {

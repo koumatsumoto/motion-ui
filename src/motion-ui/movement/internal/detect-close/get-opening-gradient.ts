@@ -1,4 +1,4 @@
-import { ClosedMovementInput } from '../types';
+import { ClosedMovementInput } from './is-closed';
 
 export const getOpeningGradient = (inputs: ClosedMovementInput): number | null => {
   if (inputs.length < 2) {

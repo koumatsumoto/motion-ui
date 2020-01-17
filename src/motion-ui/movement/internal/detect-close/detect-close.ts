@@ -1,5 +1,5 @@
-import { MotionUnit } from '../../motion-unit';
-import { MovementOutput } from '../types';
+import { MotionUnit } from '../../../motion-unit';
+import { MovementOutput } from '../../types';
 import { getOpeningGradient } from './get-opening-gradient';
 import { isClosed } from './is-closed';
 

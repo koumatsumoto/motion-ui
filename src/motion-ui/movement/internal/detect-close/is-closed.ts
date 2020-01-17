@@ -1,5 +1,8 @@
-import { MotionUnit } from '../../motion-unit';
-import { ClosedMovementInput } from '../types';
+import { Brand } from '../../../../types';
+import { MotionUnit } from '../../../motion-unit';
+import { MovingMovementInput } from '../../types';
+
+export type ClosedMovementInput = Brand<MovingMovementInput, 'MovingMovementInput'>;
 
 export const isClosed = (inputs: MotionUnit[]): inputs is ClosedMovementInput => {
   const last = inputs[inputs.length - 1];
